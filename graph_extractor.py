@@ -234,14 +234,13 @@ def ingest_triplets_to_neo4j(connector: SECDataConnector, triplets: List[Operati
 
 # Test block
 if __name__ == "__main__":
-    # Sample paragraph from an SEC filing
-    sample_text = """
-    Apple Inc. manufactures its products through outsourcing partners, primarily located in Asia. 
-    The Company has significant operations in China, where it produces the majority of its iPhone and iPad devices. 
-    Apple distributes its products globally, with major distribution centers in Europe, Asia Pacific, and the Americas. 
-    The Company holds substantial assets in Ireland through its subsidiary Apple Operations International. 
-    Apple provides services through its AppleCare program to customers worldwide.
-    """
+    # Read text from Apple 10-K filing
+    try:
+        with open("apple_10k_section1.txt", "r", encoding="utf-8") as f:
+            sample_text = f.read()
+    except FileNotFoundError:
+        print("Error: apple_10k_section1.txt not found in current directory")
+        exit(1)
     
     # Test CIK (Apple's CIK is 0000320193)
     test_cik = "0000320193"
